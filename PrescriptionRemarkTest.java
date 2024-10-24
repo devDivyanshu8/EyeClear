@@ -13,6 +13,10 @@ public class PrescriptionRemarkTest {
         validDate = sdf.parse("22/10/23");
     }
 
+    /**
+     * Test adding a valid remark with boundary conditions for the number of words (6-20 words).
+     * The validation should pass, and the remark should be added successfully.
+     */
     @Test
     public void testAddRemark_ValidBoundaryRemarks() {
         Prescription prescription1 = new Prescription(1, "Kenta", "Ohashi", 
@@ -25,6 +29,10 @@ public class PrescriptionRemarkTest {
         assertTrue(prescription2.addRemark("Optometrist verifies the final results here.", "Optometrist"));
     }
 
+    /**
+     * Test adding a remark that is too short (less than 6 words).
+     * The validation should fail, and the remark should not be added.
+     */
     @Test
     public void testAddRemark_InvalidTooShort() {
         Prescription prescription1 = new Prescription(3, "Kazuki", "Tanaka", 
@@ -37,6 +45,10 @@ public class PrescriptionRemarkTest {
         assertFalse(prescription2.addRemark("Very bad.", "Optometrist"));
     }
 
+    /**
+     * Test adding a remark that exceeds the 20-word limit.
+     * The validation should fail, and the remark should not be added.
+     */
     @Test
     public void testAddRemark_InvalidTooLong() {
         Prescription prescription1 = new Prescription(5, "Sho", "Yamada", 
@@ -53,6 +65,10 @@ public class PrescriptionRemarkTest {
         assertFalse(prescription2.addRemark(longRemark2, "Client"));
     }
 
+    /**
+     * Test exceeding the maximum number of remarks allowed (2 remarks).
+     * The validation should fail for any additional remark beyond the second.
+     */
     @Test
     public void testAddRemark_ExceedingMaxRemarks() {
         Prescription prescription = new Prescription(7, "Hinata", "Nishi", 
@@ -63,6 +79,10 @@ public class PrescriptionRemarkTest {
         assertFalse(prescription.addRemark("This remark should not be added.", "Client"));
     }
 
+    /**
+     * Test adding a remark where the first character is lowercase.
+     * The validation should fail, and the remark should not be added.
+     */
     @Test
     public void testAddRemark_InvalidFirstCharacterLowercase() {
         Prescription prescription = new Prescription(8, "Rina", "Suzuki", 
@@ -71,6 +91,10 @@ public class PrescriptionRemarkTest {
         assertFalse(prescription.addRemark("this remark starts with a lowercase letter.", "Client"));
     }
 
+    /**
+     * Test adding a remark with an invalid remark type (not 'Client' or 'Optometrist').
+     * The validation should fail, and the remark should not be added.
+     */
     @Test
     public void testAddRemark_InvalidRemarkType() {
         Prescription prescription = new Prescription(9, "Sora", "Kawasaki", 
