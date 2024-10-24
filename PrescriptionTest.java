@@ -15,6 +15,10 @@ public class PrescriptionTest {
         anotherValidDate = sdf.parse("18/05/24");
     }
 
+    /**
+     * Test adding a valid prescription with first and last names
+     * at the boundary of the acceptable length.
+     */
     @Test
     public void testAddPrescription_ValidBoundaryNames() {
         Prescription prescription1 = new Prescription(1, "Yuki", "Sato", 
@@ -27,6 +31,10 @@ public class PrescriptionTest {
         assertTrue(prescription2.addPrescription());
     }
 
+    /**
+     * Test adding a prescription where the first name is too short (less than 4 characters).
+     * The validation should fail and the prescription should not be added.
+     */
     @Test
     public void testAddPrescription_InvalidFirstName_TooShort() {
         Prescription prescription1 = new Prescription(3, "Aki", "Suzuki", 
@@ -39,6 +47,10 @@ public class PrescriptionTest {
         assertFalse(prescription2.addPrescription());
     }
 
+    /**
+     * Test adding a prescription where the last name exceeds the maximum length of 15 characters.
+     * The validation should fail and the prescription should not be added.
+     */
     @Test
     public void testAddPrescription_InvalidLastName_TooLong() {
         Prescription prescription1 = new Prescription(5, "Hiroshi", "YamamotoExtraLongName", 
@@ -51,6 +63,10 @@ public class PrescriptionTest {
         assertFalse(prescription2.addPrescription());
     }
 
+    /**
+     * Test adding a prescription with an invalid address that is too short (less than 20 characters).
+     * The validation should fail and the prescription should not be added.
+     */
     @Test
     public void testAddPrescription_InvalidAddress_TooShort() {
         Prescription prescription1 = new Prescription(7, "Kazumi", "Tanaka", 
@@ -63,6 +79,10 @@ public class PrescriptionTest {
         assertFalse(prescription2.addPrescription());
     }
 
+    /**
+     * Test adding a prescription with an invalid sphere value outside the allowable range (-20 to 20).
+     * The validation should fail and the prescription should not be added.
+     */
     @Test
     public void testAddPrescription_InvalidSphereValue() {
         Prescription prescription1 = new Prescription(9, "Haruka", "Ito", 
@@ -75,6 +95,10 @@ public class PrescriptionTest {
         assertFalse(prescription2.addPrescription());
     }
 
+    /**
+     * Test adding a prescription with an invalid axis value outside the allowable range (0 to 180).
+     * The validation should fail and the prescription should not be added.
+     */
     @Test
     public void testAddPrescription_InvalidAxisValue() {
         Prescription prescription1 = new Prescription(11, "Shinji", "Nakamura", 
